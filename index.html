@@ -14,19 +14,21 @@
 	<script src="js\jquery-1.10.2.min.js"></script>
 	<script src="js\jquery.mobile-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js\jqm-spinbox.min.js"></script>
-	<script src="js\funcs.js"></script>
+	<script src="js\funcs_pageone.js"></script>
+	<script src="js\funcs_pagetwo.js"></script>
+	
+	
 </head>
 
-
-<body onLoad="updateAllConstantsDisplay()" >
+<body onLoad="firstFunction()" >
 
 <div data-role="page" id="pageone">
   <div data-role="header" data-position="fixed" data-tap-toggle="false"  id="head" data-theme="b">
 	
 	<div data-role="navbar" class = "app"> 
 		<ul>
-			<li><a href="#" data-icon="plus" class="topcoat-button" id="scan">Add</a></li>
-			<li><a href="#" data-icon="arrow-r" id = "payButton">Pay</a></li>
+			<li><a href="#" data-icon="plus" class="topcoat-button" id="scan" onclick = "begin()">Add</a></li>
+			<li><a href="#" data-icon="arrow-r" id = "payButton" onClick = "goingToPagetwo()">Pay</a></li>
 		</ul>
 	</div>
 	<br>
@@ -51,13 +53,10 @@
 				  <div class="ui-block-c"><a id="btnDelete" class="ui-btn ui-corner-all collapseExpand" onClick="deleteAll()">Delete All</a>
 				  </div>
 		</div>
-		<div id="wrapper" data-role="content">
-					       
-		</div>
-		<div data-role="fieldcontain">
-    
-</div>
-			
+		
+		<div id="wrapper" data-role="content" ></div>
+		
+	
   </div>
 
   <!-- <div data-role="footer" data-position="fixed" data-fullscreen="true" data-theme="b" id="foot">
@@ -68,22 +67,24 @@
 	<script type="text/javascript" src="cordova.js"></script>
 	<script type="text/javascript" src="barcodescanner.js"></script>
 	<script type="text/javascript" src="childbrowser.js"></script>
-	<script type="text/javascript" src="js\barcode.js"></script>
+	<script type="text/javascript" src="js/barcode.js"></script>
 	<script type="text/javascript">app.initialize();</script>
 
 <script>
-//var details=["1111","p1","5.5","http://172.17.10.17/VC_Server/Default.aspx"];
-var details=[];
+var details=["2222","p2","99","http://172.17.10.17/VC_Server/Default.aspx"];
+//var details=[];
 var cart=[];
 
 var total_price=0.00;
+var total_Discount = 0.00;
 var cart_top=0;
 
 var pdId;
 var pdName;
-var qty;
+var qty =1;
 var subTotal=0.00;
 var mallPrice = 0.00;
+var mrp = 0.00;
 
 var server_url;
 </script>
@@ -92,8 +93,8 @@ var server_url;
 
 <div data-role="page" id="pagetwo" >
 	<div data-role="header" data-position="fixed" data-theme="b" >
-		<h1>Grand Total: Rs.<span/></h1> 
-		<h2>Total Discount: Rs.<span/></h2>
+		<h1>Grand Total: Rs.<span id = "grandTotalPagetwo"></span></h1> 
+		<h2>Total Discount: Rs.<span id = "totalDiscountPagetwo"></span></h2>
 	</div>
 	<div id="viewbill"data-role="main" class="ui-content">
 		<div  data-role="collapsible" data-theme="b">
@@ -102,27 +103,27 @@ var server_url;
 		
 		
 		
-		 <div class="ui-grid-c">
-      <div class="ui-block-a">
-        
-      PRODUCT NAME
-      </div>
-      <div class="ui-block-b">
-        QUANTITY
-      </div>
-      <div class="ui-block-c">
-        PRICE
-      </div>
-      <div class="ui-block-d">
-      SUB-TOTAL
-      </div>  
-    </div>
-</div>		
+			<div class="ui-grid-c" id = "billDetails">
+			<div class="ui-block-a">
+			
+			PRODUCT NAME
+			</div>
+			<div class="ui-block-b">
+				QUANTITY
+			</div>
+			<div class="ui-block-c">
+				PRICE
+			</div>
+			<div class="ui-block-d">
+			SUB-TOTAL
+			</div>  
+			</div>
+		</div>		
 </div>	
 	<div data-role="footer" data-position="fixed" data-theme="b">
 		<div data-role="navbar" data-theme="b">
 			<ul>
-				<li><a href="#" onclick = "" data-icon="arrow-r">SEND</a></li>
+				<li><a href="#" id="finalSend" data-icon="arrow-r" onclick = "sendToBiller()">SEND</a></li>
 				<li><a href="#pageone" data-icon="edit">EDIT</a></li>
 				<li><a href="#" onclick="navigator.app.exitApp()" data-icon="home">EXIT</a></li>
 			</ul>
