@@ -1,0 +1,62 @@
+	<!DOCTYPE html>
+	<html>
+	<head>
+	
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+	<script src="js\jquery-1.10.2.min.js"></script>
+	<script src="js\jquery.mobile-1.4.2.min.js"></script>
+	<link rel="stylesheet" href="css\jquery.mobile-1.4.2.min.css" />
+	
+	</head>
+	<body>
+	
+	
+	<div data-role="page" id="page1">
+			<div data-role="header" data-position="fixed">
+				 <h1>My Page</h1>
+			</div>
+			<div class="ui-content" role="main">
+				
+				<div class="ui-grid-a">
+				  <div class="ui-block-a"><a id="btnExpand" class="ui-btn ui-corner-all collapseExpand">Expand All</a>
+				  </div>
+				  <div class="ui-block-b"><a id="btnCollapse" class="ui-btn ui-corner-all collapseExpand">Collapse All</a>
+				  </div>
+				</div>
+						
+				<div id="theSet" class="ui-collapsible-set" >
+				   <div data-role="collapsible" > 
+					   <h3>Title 1</h3>
+					  Text content 1
+				   </div> 
+				   <div data-role="collapsible" >
+					  <h3>Title 2</h3>
+					 Text content 2
+				   </div>
+				   <div data-role="collapsible" >
+					  <h3>Title 3</h3>
+					 Text content 3
+				   </div >        
+				</div >
+
+			</div>
+	</div>
+	<script>
+	$(document).on("pagecreate", "#page1", function () {
+
+    $(document).on("click", ".collapseExpand", function(){
+        var collapseAll = this.id == "btnCollapse";
+        $('#theSet [data-role="collapsible"]').collapsible("option", "collapsed", collapseAll);
+    });
+    
+    
+	});
+	</script>
+	</body>
+	</html>
+	
