@@ -21,3 +21,37 @@
 	margin-right:0px;
 	float: right;
 }
+
+body
+{
+	font-size: 100%;
+}
+#head > div.ui-grid-a > div.ui-block-a > h3
+{
+	font-size: 150%;
+	margin-left: 38%;
+}
+
+#head > div.ui-grid-a > div.ui-block-b > h3
+{
+	font-size: 150%;
+	margin-left: 38%;
+}
+
+#scan
+{
+		font-size: 150%;
+}
+
+#payButton
+{
+		font-size: 150%;
+		font-size: 150%;
+}
+/* 
+#btnExpand
+{
+	float: left;
+	margin-left:0px;
+	position
+} */

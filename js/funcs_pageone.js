@@ -1,3 +1,5 @@
+var actualValue;//to be removed
+
 function begin()
 {
 	assignment();
@@ -77,14 +79,15 @@ function ok()
 
 function changeQtyRescan()
 {
-var i;
+alert('This item is already present in your cart.');
+    var i;
 	for(i=0;i<cart_top;i++)
 	{
 		if(cart[i].pdId.localeCompare(pdId)==0)
 			break;
 	}
 
-	cart[i].qty+=1;
+	cart[i].qty+=1; 
 	cart[i].subTotal=calc_subtotal(cart[i].mallPrice,cart[i].qty);
 	total_price+=calc_subtotal(cart[i].mallPrice,qty);
 	{
@@ -186,6 +189,7 @@ function remove_object(id)
 	cart=temp_arr_start.concat(cart);
     
 	cart_top-=1;//update the cart index
+	
 	removeFromDisplay(id);
 	updateAllConstantsDisplay();
 	disableEnablePayLink();
@@ -261,13 +265,6 @@ function check()
 
 
 
-//to splice the information.....called after scanner
-function splitter(info)
-{
-	details=info.split(",");
-}
-//end
-
 
 //to add the product to the visible cart
  function addEntry()
@@ -298,13 +295,13 @@ function changeQuantity(qtId,qtValue)
 	var actualId = qtId.split("__").pop();
 	//alert('actualId= ' + actualId);
 	var i;
-	var actualValue = parseInt(qtValue);
+	 actualValue = qtValue;
     for(i=0;i<cart_top;i++)
   {
         if((cart[i].pdId.localeCompare(actualId))==0)
         break;
   }
-    temp_subTotal=calc_subtotal(actualValue,cart[i].mallPrice);//calculate the subtotal for now
+   var temp_subTotal=calc_subtotal(actualValue,cart[i].mallPrice);//calculate the subtotal for now
 	//alert('new sub total ' + temp_subTotal);
 	cart[i].qty=actualValue;//replace the qty;
 	total_price=total_price-(cart[i].subTotal);//decrement the existing item's subtotal
@@ -339,12 +336,20 @@ $("#total_price").text(total_price);
 cart_top=0;
 $("#total_items").text(cart_top);
 
-disableEnablePayLink()
+disableEnablePayLink();
 }
 
 
 function firstFunction()
 {
 	cartID = parseInt(Math.random() * 10000);
-	updateAllConstantsDisplay()
+	updateAllConstantsDisplay();
 }
+
+
+//to splice the information.....called after scanner
+function splitter(info)
+{
+	details=info.split(",");
+}
+//end
